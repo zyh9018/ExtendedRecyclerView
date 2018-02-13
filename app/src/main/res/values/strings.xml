@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ExtendedRecyclerView</string>
+    <string name="pulltorefresh_header_hint_normal">Pull to Refresh</string>
+    <string name="pulltorefresh_header_hint_ready">Release to Refresh</string>
+    <string name="pulltorefresh_header_hint_loading">Refreshing..</string>
+    <string name="loadmore_footer_hint_loading">Loading More..</string>
+    <string name="loadmore_footer_hint_fail">Load More Fail</string>
+    <string name="loadmore_footer_hint_no_more">No More Data</string>
+</resources>
