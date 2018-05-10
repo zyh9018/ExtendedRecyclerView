@@ -66,7 +66,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             return;
         }
         mData.addAll(0, data);
-        notifyItemRangeChanged(0, data.size());
+        notifyItemRangeInserted(0, data.size());
     }
 
     public void addDataAtBottom(List<String> data) {

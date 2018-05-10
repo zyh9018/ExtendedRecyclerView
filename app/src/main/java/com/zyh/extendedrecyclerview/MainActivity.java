@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     private ExtendedRecyclerView mRecyclerView;
     private MyAdapter mAdapter;
 
+    private int mLoadMorePageIndex = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         // fake origin data
         List<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 5; i++) {
             String title = "origin text: " + i;
             arrayList.add(title);
         }
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> fakeRefreshData() {
         List<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             String title = "refresh: " + i;
             arrayList.add(title);
         }
@@ -91,8 +93,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<String> fakeLoadMoreData() {
+        mLoadMorePageIndex ++;
+        if (mLoadMorePageIndex > 3) {   // if more than three load more pages, return null for an end.
+            return null;
+        }
         List<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             String title = "load more: " + i;
             arrayList.add(title);
         }
@@ -143,10 +149,13 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //success
-                mAdapter.addDataAtBottom(data);
-                mRecyclerView.resetLoadMore();
-
+                if (data != null && data.size() > 0) {
+                    //success
+                    mAdapter.addDataAtBottom(data);
+                    mRecyclerView.resetLoadMore();
+                } else {
+                    mRecyclerView.setLoadMoreEnd();
+                }
                 //fail
 //                mRecyclerView.setLoadMoreFailed();
 

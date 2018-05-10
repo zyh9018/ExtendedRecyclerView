@@ -509,8 +509,13 @@ public class ExtendedRecyclerView extends RecyclerView {
         }
     }
 
+    /**
+     * 是否允许触发loadmore
+     * @return t/f
+     */
     private boolean isLoadMoreStateIdle() {
-        return mLoadMoreState == LOAD_MORE_STATE_IDLE && mLoadMoreFooterView != null;
+        // loadmore状态准备好，并且不处于顶部刷新的状态下(避免顶部刷新回弹导致loadmore被触发)
+        return mLoadMoreState == LOAD_MORE_STATE_IDLE && mLoadMoreFooterView != null && mRefreshState == STATUS_DEFAULT;
     }
 
     private void setLoadMoreStateLoading() {

@@ -38,6 +38,7 @@ public class LoadMoreFooterView extends ExtendedRecyclerViewLoadMoreFooterView {
         mLoadingIv = (ImageView) mRootView.findViewById(R.id.common_footer_indicator_Iv);
         mRotateAnim = AnimationUtils.loadAnimation(mRootView.getContext(), R.anim.loading_anim);
         mRotateAnim.setRepeatCount(Animation.INFINITE);
+        onReset();
     }
 
     @Override
@@ -69,16 +70,13 @@ public class LoadMoreFooterView extends ExtendedRecyclerViewLoadMoreFooterView {
 
     @Override
     public void onReset() {
-        mRootView.setVisibility(View.VISIBLE);
-        mLoadingContainer.setVisibility(View.VISIBLE);
-        mLoadingIv.setVisibility(View.VISIBLE);
-        mLoadingTv.setText(R.string.loadmore_footer_hint_loading);
+        onHide();
     }
 
     @Override
     public void onHide() {
-        mRootView.setVisibility(View.GONE);
+        mRootView.setVisibility(View.INVISIBLE);
         mLoadingIv.clearAnimation();
-        mLoadingContainer.setVisibility(View.GONE);
+        mLoadingContainer.setVisibility(View.INVISIBLE);
     }
 }
